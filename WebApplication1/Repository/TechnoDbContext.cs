@@ -33,7 +33,8 @@ namespace WebApplication1.Repository
         }
         public DbSet<SignUp> SignUp { get; set; }
 
-
+        public DbSet<Country> Country { get; set; }
+        public DbSet<City> City { get; set; }
 
 
 
@@ -47,5 +48,23 @@ namespace WebApplication1.Repository
         public string Address { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+
+        public string CountryCode { get; set; }
     }
+
+    public class Country
+    {
+        public int Id { get; set; }
+        public string CountryCode { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class City
+    {
+        public int Id { get; set; }
+        public string CountryCode { get; set; }
+        public string Name { get; set; }
+    }
+
+
 }
