@@ -45,6 +45,22 @@ namespace WebApplication1.Controllers
             };
         }
 
+        [HttpGet]
+        [Route("GetCountries")]
+        public ServiceResult<List<Country>> GetCountries()
+        {
+            var manager = new SignUpManager();
+            return manager.GetCountries();
+
+        }
+        [HttpGet]
+        [Route("GetCities")]
+        public ServiceResult<List<City>> GetCities(int countryId = 0)
+        {
+            var manager = new SignUpManager();
+            return manager.GetCities(countryId);
+
+        }
 
 
     }

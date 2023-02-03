@@ -24,7 +24,8 @@ namespace WebApplication1.Service
                 Address = model.Address,
                 Email = model.Email,
                 Password = model.Password,
-                Name = model.Name
+                Name = model.Name,
+                CountryCode = model.CountryCode,
             };
             var signUp = factory.GetInstance<SignUp>().Add(signUPInfo);
             return true;
@@ -35,6 +36,29 @@ namespace WebApplication1.Service
         {
             var validInfo = factory.GetInstance<SignUp>().List().Where(x => x.Email.ToLower() == model.Email.ToLower() && x.Password == model.Password).Any();
             return validInfo;
+        }
+
+        public List<Country> GetCountries()
+        {
+            var data = factory.GetInstance<Country>().List().ToList();
+
+            return data;
+        }
+        public List<City> GetCities(int countryId)
+        {
+            var data = new List<City>();
+
+            var countrycode = factory.GetInstance<Country>().List().Where(x => x.Id == countryId).Select(x => x.CountryCode).FirstOrDefault();
+            if (!string.IsNullOrEmpty(countrycode))
+            {
+                data = factory.GetInstance<City>().List().Where(x => x.CountryCode == countrycode).ToList();
+            }
+            else
+            {
+                data = factory.GetInstance<City>().List().ToList();
+            }
+
+            return data;
         }
     }
 }
